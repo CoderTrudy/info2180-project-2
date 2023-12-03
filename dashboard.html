@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>INFO2180 PROJECT 2 Dashboard</title>
+    <link rel="stylesheet" href="dash.css" />
+    <script src="dash.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <h3>&#x1F42C; Dolphin CRM</h3>
+        </div>
+    </header>
+    <div class="container">
+        <h2>New User</h2>
+        <div class="dashcard">
+            <div id="dashSidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div class="sidenav">
+                    <a href="#">Home</a>
+                    <a href="dashboard.html">New Contact</a>
+                    <a href="#">Users</a>
+                    <hr>
+                    <a href="#">Log Out</a>
+                </div>
+            </div>
+            <!-- <span onclick="openNav()">open</span> -->
+        </div>
+    </div>
+
+    <div id="main" class="container-fluid">
+        <div class="card">
+            <form id="myform" action="process.php" method="post" novalidate></form>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-field">
+                        <div class="form-field">
+                            <label class="form-label" for="firstname">First name<em> (Required)</em></label>
+                            <input class="form-control" type="text" id="firstname" name="firstname" placeholder="Jane"
+                                required>
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label" for="lname">Last name<em> (Required)</em></label>
+    
+                            <input class="form-control" type="text" id="lastname" name="lastname" placeholder="Doe"
+                                required>
+                             
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label" for="email">Email<em> (Required)</em></label>
+                            <input class="form-control" type="text" id="email" name="email"
+                                placeholder="something@example.com" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-field">
+                        <label class="form-label" for="role">Role</label>
+                        <input class="form-control" type="text" id="role" name="role" placeholder="Member" required>
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label" for="psw" required>Password</label>
+                        <input class="form-control" type="text" id="psw" name="psw" required>
+                    </div>
+                    <div class="form-field">
+                        <br>
+                        <button class="btn btn-primary" class="save-button" onclick="handleAdd()">Save</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+
+
+        </div>
+    </div>
+</body>
+
+</html>

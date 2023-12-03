@@ -1,0 +1,39 @@
+body {}
+
+header {
+  background-color: black;
+  color: white;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  width: 100% !important;
+  top: 0;
+  position: relative;
+  left: 0;
+}
+
+
+
+.save-button {
+  background-color: rgb(50, 50, 226);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 35px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 9px;
+  line-height: 5px;
+}
+
+.page-content {
+  /* margin-top: 70px !important; */
+}
+
+.nav-link i,
+.nav-link span {
+  color: black
+}
