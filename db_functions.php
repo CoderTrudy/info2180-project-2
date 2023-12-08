@@ -42,6 +42,27 @@ function addUser($email, $password, $firstname, $lastname, $role)
 
 }
 
+//function to add contact to database
+function addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type){
+    global $connection;
+
+    $query = "INSERT INTO contacts (title, firstname, lastname, email, telephone, company, type, assigned_to)
+              VALUES($title, $firstname, $lastname, $email, $telephone, $company, $type, $assignedto)";
+    $result =  mysqli_query($connection, $query);
+
+    if($result) {
+        return array(
+            'success' => true,
+            'message' => '' . $firstname . ' ' . $lastname . ' added to ' . $assignedto . 's contact list.'
+        );
+    }else {
+        return array(
+            'success' => false,
+            'message' => "Something went wrong. Please try again later."
+        );
+    }
+}
+
 //Function to log in a user
 function login($email, $password)
 {
