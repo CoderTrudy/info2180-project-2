@@ -1,6 +1,7 @@
 <?php include_once 'layout.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
+    
 <?= page_header("Add Contact") ?>
 
 <!-- Content for Page Here -->
@@ -9,6 +10,28 @@
     <div class="card">
         <div class="card-body">
             <!-- PHP goes here -->
+            <?php
+                if(isset($_POST['add-contact'])) {
+                    $title = $_POST['title'];
+                    $firstname = $_POST['firstname'];
+                    $lastname = $_POST['lastname'];
+                    $email = $_POST['email'];
+                    $company = $_POST['company'];
+                    $assignedto = $_POST['assignedto'];
+                    $telephone = $_POST['telephone'];
+                    $type = $_POST['type'];
+                    $result = addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type);
+                    if ($result['success']) {
+                        echo "<div class='alert alert-success'>$result[message]</div>";
+                    } else {
+                        echo "<div class='alert alert-danger'>$result[message]</div>";
+                    }
+
+                    $_POST = array();
+                }
+
+            ?>
+
             <h2 class="text-start fw-bold mb-4">Add Contact</h2>
             <form id="contact-form" action="<?=base_url("add-contact")?>" method="post" novalidate>
                 <div class="row">
@@ -44,11 +67,22 @@
                             <div class="form-field">
                                 <label class="form-label" for="assignedto">Assigned To</label>
                                 <select class="form-select" id="assignedto" name="assignedto">
-                                    <!-- should list the names of all the users in the system-->
+                                    
+                                <!-- should list the names of all the users in the system-->
+                                    <?php
+                                        $allusers = getUsers();
+                                        while ($assignedto = mysqli_fetch_array($allusers, MYSQLI_ASSOC)):;
+                                    ?>
+
+                                    <option value="<?php echo $assignedto["id"]?>">
+                                        <?php echo $assignedto["firstname"] . " " . $assignedto["lastname"]?>
+                                    </option>
+                                <?php endwhile; ?>
                                 </select>
                             </div>
                         </div>
                     </div>
+
                     <!-- Column 2 -->
                     <div class="col md">
                         <!-- Last Name -->
@@ -72,7 +106,6 @@
                         <!-- Save Button -->
                         <div class="form-field">
                             <br>
-                            <!--To add: Click event handler-->
                             <button class="btn btn-primary float-end" class="save-button" name="add-contact">Save</button>
                         </div>
                     </div>
