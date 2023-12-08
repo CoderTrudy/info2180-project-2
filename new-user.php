@@ -10,7 +10,7 @@ include_once 'layout.php';
     <!-- insert here -->
     <div class="card">
         <div class="card-body">
-            <!-- informaation -->
+            <!-- information -->
             <?php
 
             if (isset($_POST['sign-up'])) {
