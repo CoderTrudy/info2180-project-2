@@ -1,0 +1,110 @@
+<?php
+include_once 'layout.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<?=page_header()?>
+
+<!-- Content for Page Here -->
+<div class="col py-3 pt-4 page-content">
+    <!-- insert here -->
+    <div class="container">
+        <!-- contact header info -->
+        <?php
+        $item_id = $_GET['contact_id'];
+        $contact = getContactById($item_id);
+        ?>
+        <div class = "d-flex">
+            <div class="flex-shrink-0">
+                <img src="circle-user-solid.svg" class="rounded-circle" style="background-color: rgb(27, 27, 27);" alt="profile">
+            </div>
+            <div class="flex-grow-1 ms-3">
+                <h2 class="text-start fw-bold mb-0">
+                    <?php echo "" . $contact['firstname'] . " " . $contact['lastname']?>
+                </h2>
+                <p class="text-start text-body-secondary">
+                    <?php echo "Created on " . $contact['created_at'] . " by " . $contact['created_by']?>
+                    <br>
+                    <?php echo "Updated on " . $contact['updated_at']?>
+                </p>
+            </div>
+            <div>
+                <button type="button" class="btn self-assign"><img src="hand.png" style="height: 24px">Assign to me</button>
+                <button type="button" class="btn switch-role"><img src="arrow-switch.svg">Switch to [Type]</button>
+            </div>
+        </div>
+
+        <!-- details card -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md">
+                        <h6 class="card-title">Email</h6>
+                        <p class="card-text fw-semibold">
+                            <?php echo $contact['email']?>
+                        </p>
+                        <h6 class="card-title">Company</h6>
+                        <p class="card-text fw-semibold">
+                        <?php echo $contact['company']?>
+                        </p>
+                    </div>
+                    <div class="col-md">
+                        <h6 class="card-title">Telephone</h6>
+                        <p class="card-text fw-semibold">
+                        <?php echo $contact['telephone']?>
+                        </p>
+                        <h6 class="card-title">Assigned To</h6>
+                        <p class="card-text fw-semibold">
+                        <?php echo $contact['assigned_to']?>
+                        </p>
+                    </div>
+                </div>
+            </div>    
+        </div>
+
+        <!-- notes -->
+        <?php
+            if (isset($_POST['add-note'])) {
+                $notes = $_POST['notes'];
+                $contact_id = $contact['id'];
+
+                $result = addNote($contact_id, $notes);
+                
+                if ($result['success']) {
+                    echo "<div class='alert alert-success'>$result[message]</div>";
+                } else {
+                    echo "<div class='alert alert-danger'>$result[message]</div>";
+                }
+
+                $_POST = array();
+            }
+        ?>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <img src="pen-to-square.svg">
+                Notes
+            </div>
+            <div class="card-body">
+                <!-- Notes -->
+
+            </div>
+            <div class="card-footer">
+                <form id="notes-form" action="<?=base_url("details")?> method="post" novalidate>
+                    <div class="form-field">
+                        <label class="form-label" for="notes"><?php echo "Add a note about " . $contact['firstname']?></label>
+                        <textarea class="form-control" id="notes" name="notes" rows="4"></textarea>
+                    </div>
+                    <!-- Save Button -->
+                    <div class="form-field">
+                            <br>
+                            <button class="btn btn-primary float-end" class="save-button" name="add-note">Save</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?=page_footer()?>
+</html>

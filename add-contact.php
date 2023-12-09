@@ -1,4 +1,6 @@
-<?php include_once 'layout.php'; ?>
+<?php
+    include_once 'layout.php'; 
+?>
 <!DOCTYPE html>
 <html lang="en">
     
@@ -20,7 +22,8 @@
                     $assignedto = $_POST['assignedto'];
                     $telephone = $_POST['telephone'];
                     $type = $_POST['type'];
-                    $result = addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type);
+                    $createdby = getCurrentUser();
+                    $result = addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type, $createdby);
                     if ($result['success']) {
                         echo "<div class='alert alert-success'>$result[message]</div>";
                     } else {

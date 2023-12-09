@@ -1,6 +1,5 @@
 <!-- connect to db  -->
-<?php
-include_once 'config.php';
+<?php include_once 'config.php';
 
 // Connect to the database
 $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -62,6 +61,26 @@ function addContact($title, $firstname, $lastname, $email, $company, $telephone,
     }
 }
 
+//Function to add notes to database
+function addNote($contact_id, $comment) {
+    global $connection;
+
+    $query = "INSERT INTO notes (contact_id, comment) VALUES ('$contact_id', '$comment')";
+    $result = mysqli_query($connection, $query);
+
+    if($result) {
+        return array(
+            'success' => true,
+            'message' => 'Added note to contact: ' . $contact_id . '.'
+        );
+    } else {
+        return array(
+            'success' => false,
+            'message' => "Unable to add note. Try again later."
+        );
+    }
+}
+
 //Function to log in a user
 function login($email, $password)
 {
@@ -81,6 +100,17 @@ function login($email, $password)
     } else {
         return false;
     }
+}
+
+//get current user
+function getCurrentUser() {
+    global $connection;
+    $result = $_SESSION['user']['id'];
+    if ($result)
+        return $result;
+    else
+        return false;
+
 }
 
 //get user by email
@@ -227,6 +257,33 @@ function generateContactsTable()
 
 }
 
+//get notes
+function getNotesByContact($contact_id) {
+    global $connection;
+    $query = "SELECT * FROM notes WHERE contact_id = '$contact_id'";
+    $result = mysqli_query($connection, $query);
+
+    if ($result) {
+        return $result;
+    } else {
+        return array();
+    }
+}
+
+//generate notes list
+function generateNotesList($contact_id) {
+    $notes = getNoteByContact($contact_id);
+
+    $note = "";
+
+    while ($row = mysqli_fetch_assoc($notes)) {
+        $note .= "<div class=''>
+                    <h3>" . $notes['created_by'] . "</h3>
+                        <p>" . $notes['comment'] . "</p>
+                </div>";
+    }
+    echo $note;
+}
 
 
 
