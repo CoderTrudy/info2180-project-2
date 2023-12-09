@@ -39,10 +39,10 @@
                     <div class="form-field">
                         <label class="form-label" for="title">Title</label>
                         <select class="form-select" id="title" name="title" style="width:80px;">
-                            <option value="mr">Mr</option>
-                            <option value="ms">Ms</option>
-                            <option value="mrs">Mrs</option>
-                            <option value="dr">Dr</option>
+                            <option value="Mr">Mr</option>
+                            <option value="Ms">Ms</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="Dr">Dr</option>
                         </select>
                     </div>
                     <!-- Column 1 -->
@@ -96,8 +96,8 @@
                         <div class="form-field">
                             <label class="form-label" for="type">Type</label>
                             <select class="form-select" id="type" name="type">
-                                <option value="saleslead">Sales Lead</option>
-                                <option value="support">Support</option>
+                                <option value="Sales_Lead">Sales Lead</option>
+                                <option value="Support">Support</option>
                             </select>
                         </div>
                         <!-- Save Button -->

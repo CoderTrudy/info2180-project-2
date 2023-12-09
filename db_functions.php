@@ -125,6 +125,19 @@ function getContacts()
     }
 }
 
+//get contact by id number
+function getContactById($id) {
+    global $connection;
+    $query = "SELECT * FROM contacts WHERE id = '$id'";
+    $result = mysqli_query($connection, $query);
+    if($result) {
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    } else {
+        return false;
+    }
+}
+
 //generate html table for users
 function generateUsersTable()
 {
@@ -177,11 +190,11 @@ function generateContactsTable()
     <thead>
     <tr>
     <th scope='col'>#</th>
-    <th scope='col'>Full Name</th>
+    <th scope='col'>Title</th>
+    <th scope='col'>Name</th>
     <th scope='col'>Email</th>
     <th scope='col'>Company</th>
-    <th scope='col'>Contact Type</th>
-    <th scope='col'>View</th>
+    <th scope='col'>Type</th>
     </tr>
     </thead>
     <tbody>";
@@ -196,7 +209,7 @@ function generateContactsTable()
         <td>" . $row['email'] . "</td>
         <td>" . $row['company'] . "</td>
         <td>" . $row['type'] . "</td>
-        <td> <a href=" . "view-contact/" . $row['id'] . ">View</a></td>
+        <td> <a href= details.php?contact_id=" . $row['id'] . ">View</a></td>
         </tr>";
 
         $count++;
