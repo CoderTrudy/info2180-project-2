@@ -38,7 +38,7 @@
                     <!-- Title -->
                     <div class="form-field">
                         <label class="form-label" for="title">Title</label>
-                        <select class="form-select" id="title" name="title">
+                        <select class="form-select" id="title" name="title" style="width:80px;">
                             <option value="mr">Mr</option>
                             <option value="ms">Ms</option>
                             <option value="mrs">Mrs</option>
@@ -71,13 +71,10 @@
                                 <!-- should list the names of all the users in the system-->
                                     <?php
                                         $allusers = getUsers();
-                                        while ($assignedto = mysqli_fetch_array($allusers, MYSQLI_ASSOC)):;
+                                        while ($row = $allusers->fetch_assoc()) {
+                                            echo "<option value='" . $row['id'] . "'>" . $row['firstname'] . " " . $row['lastname'] . "</option>";
+                                        }
                                     ?>
-
-                                    <option value="<?php echo $assignedto["id"]?>">
-                                        <?php echo $assignedto["firstname"] . " " . $assignedto["lastname"]?>
-                                    </option>
-                                <?php endwhile; ?>
                                 </select>
                             </div>
                         </div>
