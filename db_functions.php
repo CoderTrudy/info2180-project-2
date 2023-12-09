@@ -42,6 +42,26 @@ function addUser($email, $password, $firstname, $lastname, $role)
 
 }
 
+//function to add contact to database
+function addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type) {
+    global $connection;
+
+    $query = "INSERT INTO contacts (title, firstname, lastname, email, telephone, company, type, assigned_to) VALUES ('$title', '$firstname', '$lastname', '$email', '$telephone', '$company', '$type', '$assignedto')";
+    $result =  mysqli_query($connection, $query);
+
+    if($result) {
+        return array(
+            'success' => true,
+            'message' => '' . $firstname . ' ' . $lastname . ' added to ' . $assignedto . 's contact list.'
+        );
+    } else {
+        return array(
+            'success' => false,
+            'message' => "Something went wrong. Try again later."
+        );
+    }
+}
+
 //Function to log in a user
 function login($email, $password)
 {
@@ -102,6 +122,19 @@ function getContacts()
         return $result;
     } else {
         return array();
+    }
+}
+
+//get contact by id number
+function getContactById($id) {
+    global $connection;
+    $query = "SELECT * FROM contacts WHERE id = '$id'";
+    $result = mysqli_query($connection, $query);
+    if($result) {
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    } else {
+        return false;
     }
 }
 
@@ -174,6 +207,7 @@ function generateContactsTable()
 
     $contacts = getContacts();
 
+<<<<<<< HEAD
     $table = "<table class='table table-striped table-hover'>
     <thead class='thead-dark'>
         <tr>
@@ -183,6 +217,19 @@ function generateContactsTable()
             <th scope='col'>Type</th>
             <th scope='col'>View</th>
         </tr>
+=======
+    $table = "<table class='table table
+    -striped table-hover'>
+    <thead>
+    <tr>
+    <th scope='col'>#</th>
+    <th scope='col'>Title</th>
+    <th scope='col'>Name</th>
+    <th scope='col'>Email</th>
+    <th scope='col'>Company</th>
+    <th scope='col'>Type</th>
+    </tr>
+>>>>>>> 54b9d17e3022c6d6ec91e90500e555709fc1ad83
     </thead>
     <tbody>";
 
@@ -196,7 +243,11 @@ function generateContactsTable()
         <td>" . $row['email'] . "</td>
         <td>" . $row['company'] . "</td>
         <td>" . $row['type'] . "</td>
+<<<<<<< HEAD
         <td><a href='view-contact/" . $row['id'] . "' class='btn btn-primary btn-sm'>View</a></td>
+=======
+        <td> <a href= details.php?contact_id=" . $row['id'] . ">View</a></td>
+>>>>>>> 54b9d17e3022c6d6ec91e90500e555709fc1ad83
         </tr>";
 
         $count++;

@@ -10,7 +10,7 @@ include_once 'layout.php';
     <!-- insert here -->
     <div class="card">
         <div class="card-body">
-            <!-- informaation -->
+            <!-- information -->
             <?php
 
             if (isset($_POST['sign-up'])) {
@@ -82,8 +82,31 @@ include_once 'layout.php';
 </div>
 
 <?= page_footer() ?>
-<script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function handleAdd() {
+        // Get form data
+        var formData = $('#sign-up-form').serialize();
+
+        // AJAX form submission
+        $.ajax({
+            url: 'new-user.php', // Replace 'process.php' with your backend endpoint
+            method: 'POST',
+            data: formData,
+            success: function(response) {
+                // Handle success response
+                $('#responseMessage').html(response); // Display response message
+                $('#sign-up-form')[0].reset(); // Reset the form after successful submission
+            },
+            error: function(xhr, status, error) {
+                // Handle error response
+                $('#responseMessage').html('<div class="alert alert-danger">Error occurred.</div>');
+            }
+        });
+    }
 </script>
+
+
 
 </html>
