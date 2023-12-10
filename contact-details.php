@@ -17,7 +17,7 @@ include_once 'layout.php';
         ?>
         <div class = "d-flex">
             <div class="flex-shrink-0">
-                <img src="circle-user-solid.svg" class="rounded-circle" style="background-color: rgb(27, 27, 27);" alt="profile">
+            <i class="fa-solid fa-circle-user" style="font-size:50px; color:gray;"></i>
             </div>
             <div class="flex-grow-1 ms-3">
                 <h2 class="text-start fw-bold mb-0">
