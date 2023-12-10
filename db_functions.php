@@ -278,8 +278,6 @@ function formatPhone($telephone)
 }
 
 
-
-
 //generate html table for contacts
 function generateContactsTable()
 {
