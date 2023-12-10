@@ -1,7 +1,7 @@
 body {}
 
 header {
-  background-color: black;
+  background-color: #1f2937;
   color: white;
   height: 70px;
   display: flex;
@@ -58,7 +58,6 @@ header {
     box-shadow: 2px 2px 4px rgba(255, 165, 0, 0.2); /* Orange shadow */
 }
 
-{
-
-
+.card.mb-3 .card-footer {
+  background-color:#f3f4f6;
 }

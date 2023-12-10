@@ -23,7 +23,7 @@ include_once 'layout.php';
                 <h2 class="text-start fw-bold mb-0">
                     <?php echo "" . $contact['firstname'] . " " . $contact['lastname']?>
                 </h2>
-                <p class="text-start text-body-secondary">
+                <p class="text-start text-body-secondary lh-sm">
                     <?php echo "Created on " . $contact['created_at'] . " by " . $contact['created_by']?>
                     <br>
                     <?php echo "Updated on " . $contact['updated_at']?>
@@ -56,22 +56,22 @@ include_once 'layout.php';
             <div class="card-body">
                 <div class="row">
                     <div class="col-md">
-                        <h6 class="card-title">Email</h6>
-                        <p class="card-text fw-semibold">
+                        <h6 class="card-title text-secondary fw-semibold">Email</h6>
+                        <p class="card-text">
                             <?php echo $contact['email']?>
                         </p>
-                        <h6 class="card-title">Company</h6>
-                        <p class="card-text fw-semibold">
+                        <h6 class="card-title text-secondary fw-semibold">Company</h6>
+                        <p class="card-text">
                         <?php echo $contact['company']?>
                         </p>
                     </div>
                     <div class="col-md">
-                        <h6 class="card-title">Telephone</h6>
-                        <p class="card-text fw-semibold">
+                        <h6 class="card-title text-secondary fw-semibold">Telephone</h6>
+                        <p class="card-text">
                         <?php echo $contact['telephone']?>
                         </p>
-                        <h6 class="card-title">Assigned To</h6>
-                        <p class="card-text fw-semibold">
+                        <h6 class="card-title text-secondary fw-semibold">Assigned To</h6>
+                        <p class="card-text">
                         <?php
                             $assigned = getUserById($contact['assigned_to']);
                             echo $assigned['firstname'] . " " . $assigned['lastname']?>
@@ -101,7 +101,7 @@ include_once 'layout.php';
         ?>
 
         <div class="card mb-3">
-            <div class="card-header">
+            <div class="card-header bg-white">
                 <img src="pen-to-square.svg">
                 Notes
             </div>
@@ -113,10 +113,10 @@ include_once 'layout.php';
                 ?>
 
             </div>
-            <div class="card-footer">
+            <div class="card-footer border-top-0">
                 <form id="notes-form" action="<?="http://localhost/info2180-project-2/contact-details.php?contact_id=" . $contact['id']?>" method="post" novalidate>
                     <div class="form-field">
-                        <label class="form-label" for="notes"><?php echo "Add a note about " . $contact['firstname']?></label>
+                        <label class="form-label fw-semibold" for="notes"><?php echo "Add a note about " . $contact['firstname']?></label>
                         <textarea class="form-control" id="notes" name="notes" rows="4"></textarea>
                     </div>
                     <!-- Save Button -->
