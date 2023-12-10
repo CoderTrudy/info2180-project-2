@@ -185,69 +185,36 @@ function generateUsersTable()
 function generateContactsTable()
 {
     // Add the filter row above the table headings
-    $filterRow = "
-    <thead>
-        <tr>
-            <th colspan='2'></th> <!-- Empty cells for spacing -->
-            <th colspan='4' class='text-start'>
-                <form class='form-inline' id='filterForm'>
-                    <div class='form-group mb-2'>
-                        <label for='filter' class='mr-2'> <i class='fas fa-filter'></i> Filter By: </label>
-                        <label for='filterAll' class='filter-option' data-value='all'>All</label>
-                        <label for='filterSalesLeads' class='filter-option' data-value='sales_leads'>Sales Leads</label>
-                        <label for='filterSupport' class='filter-option' data-value='support'>Support</label>
-                        <label for='filterAssignedToMe' class='filter-option' data-value='assigned_to_me'>Assigned to Me</label>
-                    </div>
-                </form>
-            </th>
-            <th colspan='2'></th> <!-- Empty cells for spacing -->
-        </tr>
-    </thead>
-    ";
 
     $contacts = getContacts();
 
-<<<<<<< HEAD
     $table = "<table class='table table-striped table-hover'>
-    <thead class='thead-dark'>
+    <thead>
         <tr>
             <th scope='col'>Name</th>
             <th scope='col'>Email</th>
             <th scope='col'>Company</th>
             <th scope='col'>Type</th>
-            <th scope='col'>View</th>
+            <th scope ='col'>   </th>
+
         </tr>
-=======
-    $table = "<table class='table table
-    -striped table-hover'>
-    <thead>
-    <tr>
-    <th scope='col'>#</th>
-    <th scope='col'>Title</th>
-    <th scope='col'>Name</th>
-    <th scope='col'>Email</th>
-    <th scope='col'>Company</th>
-    <th scope='col'>Type</th>
-    </tr>
->>>>>>> 54b9d17e3022c6d6ec91e90500e555709fc1ad83
     </thead>
     <tbody>";
 
     $count = 1;
     while ($row = mysqli_fetch_assoc($contacts)) {
-        $fullName = $row['title'] . " " . $row['firstname'] . " " . $row['lastname'];
+        $fullName = $row['title'] . ". " . $row['firstname'] . " " . $row['lastname'];
+
+
 
         $table .= "<tr>
-        <th scope='row'>$count</th>
-        <td>$fullName</td>
+        
+        
+        <td><b>$fullName</b></td>
         <td>" . $row['email'] . "</td>
         <td>" . $row['company'] . "</td>
         <td>" . $row['type'] . "</td>
-<<<<<<< HEAD
-        <td><a href='view-contact/" . $row['id'] . "' class='btn btn-primary btn-sm'>View</a></td>
-=======
-        <td> <a href= details.php?contact_id=" . $row['id'] . ">View</a></td>
->>>>>>> 54b9d17e3022c6d6ec91e90500e555709fc1ad83
+        <td><a href='view-contact/" . $row['id'] . "'>View</a></td>
         </tr>";
 
         $count++;
@@ -260,8 +227,38 @@ function generateContactsTable()
         </tr>";
     }
 
-    echo $table;
+    $caption = "
+    <div class='caption'>
+        <ul class = 'list-inline'>
+            <b><i class='fas fa-filter'></i> Filter By: </b>
+            <li> All</li>
+            <li>Sales Leads</li>
+            <li>Support</li>
+            <li>Assigned to me</li>
+        </ul>
+    </div>
+    ";
+
+    // Wrap the table in a card
+    $card = "
+    <div class='card'>
+        <div class='card-body'>
+            $caption
+            $table
+        </div>
+    </div>
+    ";
+
+    echo $card;
 }
+
+ function Filter(){
+
+ }
+
+
+    
+
 
 //close db
 function close_db()
@@ -273,6 +270,9 @@ function close_db()
         echo 'Caught exception: ', $e->getMessage(), "\n";
     }
 }
+
+
+
 
 
 // Close the connection
