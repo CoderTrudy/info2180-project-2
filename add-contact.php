@@ -95,8 +95,10 @@
                         </div>
                         <!-- Telephone -->
                         <div class="form-field">
-                            <label class="form-label" for="telephone">Telephone</label>
-                            <input class="form-control" type="text" id="telephone" name="telephone" minlength="10" maxlength="10" required>
+                            <label class="form-label" for="telephone">Telephone </label>
+                            <input class="form-control" type="tel" pattern="[0-9]{10}" id="telephone" name="telephone" placeholder="8761234567" required>
+                            
+                           
                         </div>
                         <!-- Type -->
                         <div class="form-field">
