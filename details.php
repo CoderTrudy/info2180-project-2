@@ -44,7 +44,9 @@ include_once 'layout.php';
                 ?>
                 
                     <button type="button" class="btn self-assign" name="self-assign"><img src="hand.png" style="height: 24px">Assign to me</button>
+                    <form id="switch-type-form" action="<?="http://localhost/info2180-project-2/details.php?contact_id=" . $contact['id']?>" method="post" novalidate>
                     <button type="button" class="btn switch-type" name="switch-type"><img src="arrow-switch.svg">Switch to Type</button>
+                    </form>
 
             </div>
         </div>

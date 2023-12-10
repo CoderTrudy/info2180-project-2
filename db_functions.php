@@ -329,10 +329,16 @@ function switchType($contact_id) {
         $query = "UPDATE contacts SET type = 'Sales Lead' WHERE id = '$contact_id'";
     $result = mysqli_query($connection, $query);
 
-    if ($result) {
-        return $result;
+    if($result) {
+        return array(
+            'success' => true,
+            'message' => 'Added note to contact.'
+        );
     } else {
-        return array();
+        return array(
+            'success' => false,
+            'message' => "Unable to add note. Try again later."
+        );
     }
 }
 
