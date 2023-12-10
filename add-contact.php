@@ -100,7 +100,7 @@
                         <div class="form-field">
                             <label class="form-label" for="type">Type</label>
                             <select class="form-select" id="type" name="type">
-                                <option value="Sales_Lead">Sales Lead</option>
+                                <option value="Sales Lead">Sales Lead</option>
                                 <option value="Support">Support</option>
                             </select>
                         </div>
