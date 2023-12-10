@@ -318,20 +318,37 @@ function generateNotesList($contact_id) {
 }
 
 
+function switchType($contact_id) {
+    global $connection;
+
+    $query = "SELECT type FROM contacts WHERE id = '$contact_id'";
+    $result = mysqli_query($connection, $query);
+
+    if (mysqli_fetch_assoc($result) == "Sales Lead")
+        $query = "UPDATE contacts SET type = 'Support' WHERE id = '$contact_id'";
+    else
+        $query = "UPDATE contacts SET type = 'Sales Lead' WHERE id = '$contact_id'";
+    $result = mysqli_query($connection, $query);
+
+    if($result) {
+        return array(
+            'success' => true,
+            'message' => 'Added note to contact.'
+        );
+    } else {
+        return array(
+            'success' => false,
+            'message' => "Unable to add note. Try again later."
+        );
+    }
+}
 
 
+function Filter(){
+
+}
 
 
-
-
-
-
-
-
-
- function Filter(){
-
- }
 
 
 
