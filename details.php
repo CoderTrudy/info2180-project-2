@@ -117,4 +117,14 @@ include_once 'layout.php';
 <?=page_footer()?>
 
 
+</html>             </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?=page_footer()?>
+
+
 </html>

@@ -30,7 +30,7 @@ height: 40px;
     margin-left: 10px;
 }
 
-.table
+
 
 .caption ul li:hover {
     text-decoration: underline;
@@ -38,4 +38,19 @@ height: 40px;
     cursor: pointer;
     color: blue;
 }
+
+.table{
+    border: 1px solid rgb(100, 100, 100); 
+    border-radius: 10px;
+    overflow: hidden;
+}
+.table th{
+    background-color:rgb(224, 222, 222);
+}
+.table td{
+    background-color: white;
+    border-bottom-color: rgb(235, 229, 229);
+    border-top-color: rgb(255, 250, 250);
+}
+
 

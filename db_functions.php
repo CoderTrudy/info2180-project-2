@@ -248,11 +248,7 @@ function generateContactsTable()
         <td>" . $row['email'] . "</td>
         <td>" . $row['company'] . "</td>
         <td>" . $row['type'] . "</td>
-<<<<<<< HEAD
-      <td><a href='view-contact/" . $row['id'] . "' class='btn btn-primary btn-sm'>View</a></td>
-=======
         <td> <a href= details.php?contact_id=" . $row['id'] . ">View</a></td>
->>>>>>> 54b9d17e3022c6d6ec91e90500e555709fc1ad83
         </tr>";
 
         $count++;
@@ -264,7 +260,7 @@ function generateContactsTable()
         <td colspan='6' class='text-center'>No contacts found.</td>
         </tr>";
     }
-
+    
     $caption = "
     <div class='caption'>
         <ul class = 'list-inline'>
@@ -337,8 +333,6 @@ function generateNotesList($contact_id) {
 
  }
 
-
-    
 
 
 //close db

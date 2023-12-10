@@ -55,7 +55,7 @@ function page_header($title = "INFO2180 PROJECT 2")
                     <li>
                         <a href="{$add_contact}" data-bs-toggle="collapse"
                             class="nav-link px-0 align-middle">
-                            <i class="fas fa-gauge"></i> <span class="ms-1 d-none d-sm-inline">New Contact</span>
+                            <i class="far fa-user-circle"></i> <span class="ms-1 d-none d-sm-inline">New Contact</span>
                         </a>
 
                     </li>
