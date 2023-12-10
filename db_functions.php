@@ -244,7 +244,7 @@ function generateContactsTable()
         <td>" . $row['email'] . "</td>
         <td>" . $row['company'] . "</td>
         <td>" . $row['type'] . "</td>
-        <td> <a href= details.php?contact_id=" . $row['id'] . ">View</a></td>
+        <td> <a href= contact-details.php?contact_id=" . $row['id'] . ">View</a></td>
         </tr>";
 
         $count++;
