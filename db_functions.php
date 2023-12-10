@@ -214,6 +214,27 @@ function generateUsersTable()
     echo $table;
 }
 
+function formatPhone($telephone){ 
+      
+    // Pass phone number in preg_match function 
+    if(preg_match( 
+        '/^\+[0-9]([0-9]{3})([0-9]{3})([0-9]{4})$/',  
+    $telephone, $value)) { 
+      
+        // Store value in format variable 
+        $format = $value[1] . '-' .  
+            $value[2] . '-' . $value[3]; 
+    } 
+    else { 
+     return $telephone;
+    }
+    // Print the given format 
+    return $format;
+    
+} 
+   
+
+
 
 //generate html table for contacts
 function generateContactsTable()

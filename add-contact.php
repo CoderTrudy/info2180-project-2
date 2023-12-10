@@ -24,6 +24,7 @@
                     $company = $_POST['company'];
                     $assignedto = $_POST['assignedto'];
                     $telephone = $_POST['telephone'];
+                    $telephone = formatPhone($telephone);
                     $type = $_POST['type'];
                     $current_user = $_SESSION['user']['id'];
                     $result = addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type, $current_user);
@@ -35,16 +36,15 @@
 
                     $_POST = array();
                 }
-
             ?>
 
             <h2 class="text-start fw-bold mb-4">Add Contact</h2>
-            <form id="contact-form" action="<?=base_url("add-contact")?>" method="post" novalidate>
+            <form id="contact-form" action="<?=base_url("add-contact")?>" method="post">
                 <div class="row">
                     <!-- Title -->
                     <div class="form-field">
                         <label class="form-label" for="title">Title</label>
-                        <select class="form-select" id="title" name="title" style="width:80px;">
+                        <select class="form-select" id="title" name="title" style="width:80px;" required>
                             <option value="Mr">Mr</option>
                             <option value="Ms">Ms</option>
                             <option value="Mrs">Mrs</option>
@@ -62,17 +62,17 @@
                             <!-- Email -->
                             <div class="form-field">
                                 <label class="form-label" for="email">Email</label>
-                                <input class="form-control" type="text" id="email" name="email" required>
+                                <input class="form-control" type="email" id="email" name="email" required>
                             </div>
                             <!-- Company -->
                             <div class="form-field">
                                 <label class="form-label" for="company">Company</label>
-                                <input class="form-control" type="text" id="company" name="company">
+                                <input class="form-control" type="text" id="company" name="company" required>
                             </div>
                             <!-- Assigned to -->
                             <div class="form-field">
                                 <label class="form-label" for="assignedto">Assigned To</label>
-                                <select class="form-select" id="assignedto" name="assignedto">
+                                <select class="form-select" id="assignedto" name="assignedto" required>
                                     
                                 <!-- should list the names of all the users in the system-->
                                     <?php
@@ -96,12 +96,12 @@
                         <!-- Telephone -->
                         <div class="form-field">
                             <label class="form-label" for="telephone">Telephone</label>
-                            <input class="form-control" type="text" id="telephone" name="telephone">
+                            <input class="form-control" type="text" id="telephone" name="telephone" minlength="10" maxlength="10" required>
                         </div>
                         <!-- Type -->
                         <div class="form-field">
                             <label class="form-label" for="type">Type</label>
-                            <select class="form-select" id="type" name="type">
+                            <select class="form-select" id="type" name="type" required>
                                 <option value="Sales Lead">Sales Lead</option>
                                 <option value="Support">Support</option>
                             </select>
