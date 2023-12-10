@@ -1,5 +1,6 @@
 <?php
     session_start();
+ 
     include_once 'layout.php'; 
 ?>
 <!DOCTYPE html>
@@ -14,6 +15,7 @@
         <div class="card-body">
             <!-- PHP goes here -->
             <?php
+         
                 if(isset($_POST['add-contact'])) {
                     $title = $_POST['title'];
                     $firstname = $_POST['firstname'];

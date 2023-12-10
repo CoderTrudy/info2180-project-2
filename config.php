@@ -14,5 +14,5 @@ if($connection === false) {
 }
 
 // Close the connection
-mysqli_close($connection);
+// mysqli_close($connection);
 ?>

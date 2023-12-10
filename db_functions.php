@@ -239,11 +239,7 @@ function generateContactsTable()
     while ($row = mysqli_fetch_assoc($contacts)) {
         $fullName = $row['title'] . ". " . $row['firstname'] . " " . $row['lastname'];
 
-
-
         $table .= "<tr>
-        
-        
         <td><b>$fullName</b></td>
         <td>" . $row['email'] . "</td>
         <td>" . $row['company'] . "</td>
