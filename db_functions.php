@@ -258,7 +258,7 @@ function generateContactsTable()
 }
 
 //get notes
-function getNotesByContact($contact_id) {
+function getNoteByContact($contact_id) {
     global $connection;
     $query = "SELECT * FROM notes WHERE contact_id = '$contact_id'";
     $result = mysqli_query($connection, $query);
@@ -278,8 +278,8 @@ function generateNotesList($contact_id) {
 
     while ($row = mysqli_fetch_assoc($notes)) {
         $note .= "<div class=''>
-                    <h3>" . $notes['created_by'] . "</h3>
-                        <p>" . $notes['comment'] . "</p>
+                    <h5>" . $row['created_by'] . "</h5>
+                        <p>" . $row['comment'] . "</p>
                 </div>";
     }
     echo $note;

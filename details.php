@@ -87,6 +87,10 @@ include_once 'layout.php';
             </div>
             <div class="card-body">
                 <!-- Notes -->
+                <?php
+                    $contact_id = $contact['id'];
+                    generateNotesList($contact_id);
+                ?>
 
             </div>
             <div class="card-footer">
