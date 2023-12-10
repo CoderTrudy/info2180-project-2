@@ -222,24 +222,26 @@ function generateContactsTable()
     $table = "<table class='table table
     -striped table-hover'>
     <thead>
-    <tr>
-    <th scope='col'>#</th>
-    <th scope='col'>Title</th>
-    <th scope='col'>Name</th>
-    <th scope='col'>Email</th>
-    <th scope='col'>Company</th>
-    <th scope='col'>Type</th>
-    </tr>
+        <tr>
+            <th scope='col'>Name</th>
+            <th scope='col'>Email</th>
+            <th scope='col'>Company</th>
+            <th scope='col'>Type</th>
+            <th scope='col'>    </th>
+        </tr>
     </thead>
     <tbody>";
 
     $count = 1;
     while ($row = mysqli_fetch_assoc($contacts)) {
+        $fullName = $row['title'] . ". " . $row['firstname'] . " " . $row['lastname'];
+
+
+
         $table .= "<tr>
-        <th scope=
-        'row'>$count</th>
-        <td>" . $row['title'] . "</td>
-        <td>" . $row['firstname'] . " " . $row['lastname'] . "</td>
+        
+        
+        <td><b>$fullName</b></td>
         <td>" . $row['email'] . "</td>
         <td>" . $row['company'] . "</td>
         <td>" . $row['type'] . "</td>
@@ -256,9 +258,31 @@ function generateContactsTable()
         <td colspan='6' class='text-center'>No contacts found.</td>
         </tr>";
     }
+    //$table.="</body></table>;
+    $caption = "
+    <div class='caption'>
+        <ul class = 'list-inline'>
+            <b><i class='fas fa-filter'></i> Filter By: </b>
+            <li> All</li>
+            <li>Sales Leads</li>
+            <li>Support</li>
+            <li>Assigned to me</li>
+        </ul>
+    </div>
+    ";
 
-    echo $table;
+    // Wrap the table in a card
+    $card = "
+    <div class='card'>
+        <div class='card-body'>
+            $caption
+            $table
+        </div>
+    </div>
+    ";
 
+    echo $card;
+    //echo $table;
 }
 
 //get notes
@@ -293,13 +317,29 @@ function generateNotesList($contact_id) {
 }
 
 
+function switchType($contact_id) {
+    global $connection;
+
+    $query = "SELECT type FROM contacts WHERE id = '$contact_id'";
+    $result = mysqli_query($connection, $query);
+
+    if (mysqli_fetch_assoc($result) == "Sales Lead")
+        $query = "UPDATE contacts SET type = 'Support' WHERE id = '$contact_id'";
+    else
+        $query = "UPDATE contacts SET type = 'Sales Lead' WHERE id = '$contact_id'";
+    $result = mysqli_query($connection, $query);
+
+    if ($result) {
+        return $result;
+    } else {
+        return array();
+    }
+}
 
 
+function Filter(){
 
-
-
-
-
+}
 
 
 

@@ -30,8 +30,22 @@ include_once 'layout.php';
                 </p>
             </div>
             <div>
-                <button type="button" class="btn self-assign"><img src="hand.png" style="height: 24px">Assign to me</button>
-                <button type="button" class="btn switch-role"><img src="arrow-switch.svg">Switch to [Type]</button>
+                <?php
+                    if (isset($_POST['switch-type'])) {
+                        $result = switchType($contact['id']);
+                        if ($result['success']) {
+                            echo "<div class='alert alert-success'>$result[message]</div>";
+                        } else {
+                            echo "<div class='alert alert-danger'>$result[message]</div>";
+                        }
+        
+                        $_POST = array();
+                    }
+                ?>
+                
+                    <button type="button" class="btn self-assign" name="self-assign"><img src="hand.png" style="height: 24px">Assign to me</button>
+                    <button type="button" class="btn switch-type" name="switch-type"><img src="arrow-switch.svg">Switch to Type</button>
+
             </div>
         </div>
 
@@ -113,7 +127,7 @@ include_once 'layout.php';
         </div>
     </div>
 </div>
-
+<script src="details.js"></script>
 <?=page_footer()?>
 
 

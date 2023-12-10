@@ -1,0 +1,55 @@
+.filter-option {
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.filter-option:hover {
+    text-decoration: underline;
+}
+
+button{
+color: white;
+background-color: rgb(34, 71, 194) !important;
+border-radius: 5px;
+border: none;
+width: 140px;
+height: 40px;
+}
+.caption ul{
+    padding: 0;
+    list-style: none;
+    margin:0;
+}
+
+.caption ul li{
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 25px;
+    color: rgb(100, 100, 100); 
+    margin-left: 10px;
+}
+
+
+
+.caption ul li:hover {
+    text-decoration: underline;
+    text-decoration-color: blue;
+    cursor: pointer;
+    color: blue;
+}
+
+.table{
+    border: 1px solid rgb(100, 100, 100); 
+    border-radius: 10px;
+    overflow: hidden;
+}
+.table th{
+    background-color:rgb(224, 222, 222);
+}
+.table td{
+    background-color: white;
+    border-bottom-color: rgb(235, 229, 229);
+    border-top-color: rgb(255, 250, 250);
+}
+
