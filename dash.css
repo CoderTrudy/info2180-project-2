@@ -1,7 +1,7 @@
 body {}
 
 header {
-  background-color: black;
+  background-color: #1f2937;
   color: white;
   height: 70px;
   display: flex;
@@ -43,8 +43,8 @@ header {
     color: black;
     border-radius: 5px;
     height: 40px;
-    width: 180px;
-    border: 1px solid #227537; 
+    width: 150px;
+    border: 1px none; 
     box-shadow: 2px 2px 4px rgba(0, 100, 0, 0.2); /* Green shadow */
 
 }
@@ -54,11 +54,11 @@ header {
     background-color: orange;
     height: 40px;
     color: black;
-    border: 1px solid #b17b16; /* Orange border color */
+    border: 1px none; /* Orange border color */
     box-shadow: 2px 2px 4px rgba(255, 165, 0, 0.2); /* Orange shadow */
 }
 
-{
-
-
+#notes-form .form-field {
+  background-color:#f3f4f6;
 }
+

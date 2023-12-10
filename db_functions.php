@@ -42,13 +42,14 @@ function addUser($email, $password, $firstname, $lastname, $role)
 }
 
 //function to add contact to database
-function addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type, $created_by) {
+function addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type, $created_by)
+{
     global $connection;
 
     $query = "INSERT INTO contacts (title, firstname, lastname, email, telephone, company, type, assigned_to, created_by) VALUES ('$title', '$firstname', '$lastname', '$email', '$telephone', '$company', '$type', '$assignedto', '$created_by')";
-    $result =  mysqli_query($connection, $query);
+    $result = mysqli_query($connection, $query);
 
-    if($result) {
+    if ($result) {
         return array(
             'success' => true,
             'message' => '' . $firstname . ' ' . $lastname . ' added to ' . $assignedto . 's contact list.'
@@ -62,14 +63,15 @@ function addContact($title, $firstname, $lastname, $email, $company, $telephone,
 }
 
 //Function to add notes to database
-function addNote($contact_id, $comment, $created_by) {
+function addNote($contact_id, $comment, $created_by)
+{
     global $connection;
 
     $query = "INSERT INTO notes (contact_id, comment, created_by) VALUES ('$contact_id', '$comment','$created_by')";
     $result = mysqli_query($connection, $query);
     $created_by_user = getUserById($created_by);
 
-    if($result) {
+    if ($result) {
         return array(
             'success' => true,
             'message' => 'Added note to contact: ' . $created_by_user['firstname'] . " " . $created_by_user['lastname'] . '.'
@@ -119,7 +121,8 @@ function getUserByEmail($email)
 }
 
 //get user by id
-function getUserById($id) {
+function getUserById($id)
+{
     global $connection;
     $query = "SELECT * FROM users WHERE id = '$id'";
     $result = mysqli_query($connection, $query);
@@ -159,12 +162,51 @@ function getContacts()
     }
 }
 
+function getContactsTypeSupport()
+{
+    global $connection;
+    $query = "SELECT * FROM contacts where type ='Support'";
+    $result = mysqli_query($connection, $query);
+
+    if ($result) {
+        return $result;
+    } else {
+        return array();
+    }
+}
+function getContactsTypeSalesLead()
+{
+    global $connection;
+    $query = "SELECT * FROM contacts where type ='Sales Lead'";
+    $result = mysqli_query($connection, $query);
+
+    if ($result) {
+        return $result;
+    } else {
+        return array();
+    }
+}
+function getContactsTypeAssigned()
+{
+    global $connection;
+    $id = $_SESSION["user"]['id'] ?? 0;
+    $query = "SELECT * FROM contacts where assigned_to =$id";
+    $result = mysqli_query($connection, $query);
+
+    if ($result) {
+        return $result;
+    } else {
+        return array();
+    }
+}
+
 //get contact by id number
-function getContactById($id) {
+function getContactById($id)
+{
     global $connection;
     $query = "SELECT * FROM contacts WHERE id = '$id'";
     $result = mysqli_query($connection, $query);
-    if($result) {
+    if ($result) {
         $row = mysqli_fetch_assoc($result);
         return $row;
     } else {
@@ -214,25 +256,27 @@ function generateUsersTable()
     echo $table;
 }
 
-function formatPhone($telephone){ 
-      
+function formatPhone($telephone)
+{
+
     // Pass phone number in preg_match function 
-    if(preg_match( 
-        '/^\+[0-9]([0-9]{3})([0-9]{3})([0-9]{4})$/',  
-    $telephone, $value)) { 
-      
+    if (
+        preg_match(
+            '/^\+[0-9]([0-9]{3})([0-9]{3})([0-9]{4})$/',
+            $telephone, $value)
+    ) {
+
         // Store value in format variable 
-        $format = $value[1] . '-' .  
-            $value[2] . '-' . $value[3]; 
-    } 
-    else { 
-     return $telephone;
+        $format = $value[1] . '-' .
+            $value[2] . '-' . $value[3];
+    } else {
+        return $telephone;
     }
     // Print the given format 
     return $format;
-    
-} 
-   
+
+}
+
 
 
 
@@ -240,8 +284,31 @@ function formatPhone($telephone){
 function generateContactsTable()
 {
     // Add the filter row above the table headings
+  
+    //filter function here
+    $filterKey = $_GET['filter'] ?? "All";
 
-    $contacts = getContacts();
+    switch ($filterKey) {
+       
+        case 'Sale':
+            //filter the contacts array by sales lead type
+            $contacts = getContactsTypeSalesLead();
+            break;
+        case 'Support':
+            //filter the contact array by support type
+            $contacts = getContactsTypeSupport();
+            break;
+        case 'Assigned':
+            //filter the contact array by assign id
+            $contacts = getContactsTypeAssigned();
+            break;
+        default:
+             $contacts = getContacts();
+            break;
+
+
+    }
+
 
     $table = "<table class='table table-striped table-hover'>
     <thead>
@@ -258,6 +325,9 @@ function generateContactsTable()
 
     $count = 1;
     while ($row = mysqli_fetch_assoc($contacts)) {
+
+
+        
         $fullName = $row['title'] . ". " . $row['firstname'] . " " . $row['lastname'];
 
         $table .= "<tr>
@@ -277,15 +347,15 @@ function generateContactsTable()
         <td colspan='6' class='text-center'>No contacts found.</td>
         </tr>";
     }
-    
+
     $caption = "
     <div class='caption'>
         <ul class = 'list-inline'>
             <b><i class='fas fa-filter'></i> Filter By: </b>
-            <li> All</li>
-            <li>Sales Leads</li>
-            <li>Support</li>
-            <li>Assigned to me</li>
+            <a href='?filter=All'><li>All</li></a>
+            <a href='?filter=Sales'><li>Sales Leads</li></a>
+            <a href='?filter=Support'><li>Support</li></a>
+            <a href='?filter=Assigned'><li>Assigned to me</li></a>
         </ul>
     </div>
     ";
@@ -304,7 +374,8 @@ function generateContactsTable()
 }
 
 //get notes
-function getNoteByContact($contact_id) {
+function getNoteByContact($contact_id)
+{
     global $connection;
     $query = "SELECT * FROM notes WHERE contact_id = '$contact_id'";
     $result = mysqli_query($connection, $query);
@@ -317,7 +388,8 @@ function getNoteByContact($contact_id) {
 }
 
 //generate notes list
-function generateNotesList($contact_id) {
+function generateNotesList($contact_id)
+{
     $notes = getNoteByContact($contact_id);
     $note = "";
 
@@ -327,7 +399,7 @@ function generateNotesList($contact_id) {
         $created_by_user = getUserById($created_by);
 
         $note .= "<div class=''>
-                    <h5>" . $created_by_user['firstname'] . " " . $created_by_user['lastname']  . "</h5>
+                    <h5>" . $created_by_user['firstname'] . " " . $created_by_user['lastname'] . "</h5>
                         <p>" . $row['comment'] . "</p>
                 </div>";
     }
@@ -335,7 +407,8 @@ function generateNotesList($contact_id) {
 }
 
 
-function switchType($contact_id) {
+function switchType($contact_id)
+{
     global $connection;
 
     $query = "SELECT type FROM contacts WHERE id = '$contact_id'";
@@ -347,7 +420,7 @@ function switchType($contact_id) {
         $query = "UPDATE contacts SET type = 'Sales Lead' WHERE id = '$contact_id'";
     $result = mysqli_query($connection, $query);
 
-    if($result) {
+    if ($result) {
         return array(
             'success' => true,
             'message' => 'Added note to contact.'
@@ -361,12 +434,68 @@ function switchType($contact_id) {
 }
 
 
-function Filter(){
+/* function filter(){
+    $filterAll = isset($_GET['filterSL']) ? $_GET['filterSL'] : "All"
+    $filterSaLe =
+    $filter Sup =
+    $filter Asgn =
 
+
+
+   if (($filter == "All" || $row['type'] == $filter) && ($filter != "Sales_Lead" || $row['type'] == "Sales Lead")) {
+            $table .= "<tr>
+                <td>$fullName</td>
+                <td>" . $row['email'] . "</td>
+                <td>" . $row['company'] . "</td>
+                <td>" . $row['type'] . "</td>
+                <td><a href='view-contact/" . $row['id'] . "'>View</a></td>
+            </tr>";
+            $count++;
+        }
+    }
+
+    //if no contacts
+    if ($count == 1) {
+        $table .= "<tr>
+        <td colspan='5' class='text-center'>No contacts found.</td>
+        </tr>";
+    }
 }
 
+*/
 
 
+/*
+function filterTable(filterValue) {
+    var table, tr, td, i, txtValue;
+    table = document.getElementById("generateContactsTable()"); // <--- table ID generateContactsTable()
+    tr = table.getElementsByTagName("tr");
+  
+    // Loop through all table rows, and hide those that don't match the filter value
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[3]; // Change index based on the column you want to filter
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue === filterValue) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+  
+  function resetFilter() {
+    var table, tr, i;
+    table = document.getElementById(""); // <--- table ID
+    tr = table.getElementsByTagName("tr");
+  
+    // Reset display for all table rows
+    for (i = 0; i < tr.length; i++) {
+      tr[i].style.display = "";
+    }
+  }
+*/
 
 
 //close db
@@ -389,8 +518,3 @@ function close_db()
 
 
 ?>
-
-
-
-
-
