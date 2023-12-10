@@ -114,7 +114,7 @@ include_once 'layout.php';
 
             </div>
             <div class="card-footer">
-                <form id="notes-form" action="<?="http://localhost/info2180-project-2/details.php?contact_id=" . $contact['id']?>" method="post" novalidate>
+                <form id="notes-form" action="<?="http://localhost/info2180-project-2/contact-details.php?contact_id=" . $contact['id']?>" method="post" novalidate>
                     <div class="form-field">
                         <label class="form-label" for="notes"><?php echo "Add a note about " . $contact['firstname']?></label>
                         <textarea class="form-control" id="notes" name="notes" rows="4"></textarea>
