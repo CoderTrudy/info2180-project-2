@@ -1,0 +1,9 @@
+.filter-option {
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.filter-option:hover {
+    text-decoration: underline;
+}

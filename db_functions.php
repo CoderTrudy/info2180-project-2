@@ -214,13 +214,34 @@ function generateUsersTable()
     echo $table;
 }
 
+
 //generate html table for contacts
 function generateContactsTable()
 {
+    // Add the filter row above the table headings
+    $filterRow = "
+    <thead>
+        <tr>
+            <th colspan='2'></th> <!-- Empty cells for spacing -->
+            <th colspan='4' class='text-start'>
+                <form class='form-inline' id='filterForm'>
+                    <div class='form-group mb-2'>
+                        <label for='filter' class='mr-2'> <i class='fas fa-filter'></i> Filter By: </label>
+                        <label for='filterAll' class='filter-option' data-value='all'>All</label>
+                        <label for='filterSalesLeads' class='filter-option' data-value='sales_leads'>Sales Leads</label>
+                        <label for='filterSupport' class='filter-option' data-value='support'>Support</label>
+                        <label for='filterAssignedToMe' class='filter-option' data-value='assigned_to_me'>Assigned to Me</label>
+                    </div>
+                </form>
+            </th>
+            <th colspan='2'></th> <!-- Empty cells for spacing -->
+        </tr>
+    </thead>
+    ";
+
     $contacts = getContacts();
 
-    $table = "<table class='table table
-    -striped table-hover'>
+    $table = "<table class='table table-striped table-hover'>
     <thead>
     <tr>
     <th scope='col'>#</th>
@@ -235,11 +256,11 @@ function generateContactsTable()
 
     $count = 1;
     while ($row = mysqli_fetch_assoc($contacts)) {
+        $fullName = $row['title'] . " " . $row['firstname'] . " " . $row['lastname'];
+
         $table .= "<tr>
-        <th scope=
-        'row'>$count</th>
-        <td>" . $row['title'] . "</td>
-        <td>" . $row['firstname'] . " " . $row['lastname'] . "</td>
+        <th scope='row'>$count</th>
+        <td>$fullName</td>
         <td>" . $row['email'] . "</td>
         <td>" . $row['company'] . "</td>
         <td>" . $row['type'] . "</td>
@@ -247,7 +268,6 @@ function generateContactsTable()
         </tr>";
 
         $count++;
-
     }
 
     //if no contacts
@@ -258,7 +278,6 @@ function generateContactsTable()
     }
 
     echo $table;
-
 }
 
 //get notes
@@ -316,10 +335,13 @@ function close_db()
 }
 
 
-
-
-
-
-
 // Close the connection
 // mysqli_close($connection);
+
+
+?>
+
+
+
+
+
