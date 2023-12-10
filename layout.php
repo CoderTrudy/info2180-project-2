@@ -27,6 +27,7 @@ function page_header($title = "INFO2180 PROJECT 2")
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 </head>
 
@@ -60,15 +61,14 @@ function page_header($title = "INFO2180 PROJECT 2")
 
                     </li>
                     <li>
-                        <a href="{$users}" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fas fa-gauge"></i> <span class="ms-1 d-none d-sm-inline">Users</span>
+                        <a href="{$users}" data-bs-toggle="collapse" class="nav-link px-0 align-middle"><i class="bi bi-people"></i><span class="ms-1 d-none d-sm-inline">Users</span>
                         </a>
 
                     </li>
                     <hr>
                     <li>
                         <a href="{$logout}" class="nav-link px-0 align-middle">
-                            <i class="fas fa-sign-out"></i> <span class="ms-1 d-none d-sm-inline">Logout</span></a>
+                            <i class="fas fa-sign-out fa-rotate-180"></i> <span class="ms-1 d-none d-sm-inline">Logout</span></a>
                     </li>
 
                     <hr>

@@ -33,25 +33,21 @@ include_once 'layout.php';
 
             ?>
 
-            <form id="sign-up-form" action="<?=base_url("new-user")?>" method="post" novalidate>
+            <form id="sign-up-form" action="<?=base_url("new-user")?>" method="post">
             <div class="row">
                 <div class="col-md">
                     <div class="form-field">
                         <div class="form-field">
-                            <label class="form-label" for="firstname">First name<em> (Required)</em></label>
-                            <input class="form-control" type="text" id="firstname" name="firstname" placeholder="Jane"
-                                required>
+                            <label class="form-label" for="firstname">First name</label>
+                            <input class="form-control" type="text" id="firstname" name="firstname" placeholder="Jane" required>
                         </div>
                         <div class="form-field">
-                            <label class="form-label" for="lname">Last name<em> (Required)</em></label>
-
-                            <input class="form-control" type="text" id="lastname" name="lastname" placeholder="Doe"
-                                required>
+                            <label class="form-label" for="lname">Last name</label>
+                            <input class="form-control" type="text" id="lastname" name="lastname" placeholder="Doe" required>
                         </div>
                         <div class="form-field">
-                            <label class="form-label" for="email">Email<em> (Required)</em></label>
-                            <input class="form-control" type="text" id="email" name="email"
-                                placeholder="something@example.com" required>
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control" type="text" id="email" name="email" placeholder="something@example.com" required>
                         </div>
                     </div>
                 </div>
@@ -69,8 +65,7 @@ include_once 'layout.php';
                     </div>
                     <div class="form-field ">
                         <br>
-                        <button class="btn btn-primary float-end" class="save-button" onclick="handleAdd()"
-                            name="sign-up">Save</button>
+                        <button class="btn btn-primary float-end" class="save-button" onclick="handleAdd()" name="sign-up">Save</button>
                     </div>
                 </div>
             </div>
