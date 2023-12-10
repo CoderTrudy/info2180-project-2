@@ -43,9 +43,9 @@ include_once 'layout.php';
                     }
                 ?>
                 
-                    <button type="button" class="btn self-assign" name="self-assign"><i class="fa-solid fa-hand"></i>Assign to me</button>
+                    <button type="button" class="btn self-assign" name="self-assign"><i class="fa-solid fa-hand"></i> Assign to me</button>
                     <form id="switch-type-form" action="<?="http://localhost/info2180-project-2/contact-details.php?contact_id=" . $contact['id']?>" method="post" novalidate>
-                    <button type="button" class="btn switch-type" name="switch-type"><i class='fas fa-exchange-alt fa-lg'>fa-lg</i>Switch to Type</button>
+                    <button type="button" class="btn switch-type" name="switch-type"><i class='fas fa-exchange-alt fa-lg'> </i>Switch to Type</button>
                     </form>
 
             </div>
