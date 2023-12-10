@@ -1,6 +1,5 @@
 <!-- connect to db  -->
-<?php
-include_once 'config.php';
+<?php include_once 'config.php';
 
 // Connect to the database
 $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -43,10 +42,10 @@ function addUser($email, $password, $firstname, $lastname, $role)
 }
 
 //function to add contact to database
-function addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type) {
+function addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type, $created_by) {
     global $connection;
 
-    $query = "INSERT INTO contacts (title, firstname, lastname, email, telephone, company, type, assigned_to) VALUES ('$title', '$firstname', '$lastname', '$email', '$telephone', '$company', '$type', '$assignedto')";
+    $query = "INSERT INTO contacts (title, firstname, lastname, email, telephone, company, type, assigned_to, created_by) VALUES ('$title', '$firstname', '$lastname', '$email', '$telephone', '$company', '$type', '$assignedto', '$created_by')";
     $result =  mysqli_query($connection, $query);
 
     if($result) {
@@ -58,6 +57,27 @@ function addContact($title, $firstname, $lastname, $email, $company, $telephone,
         return array(
             'success' => false,
             'message' => "Something went wrong. Try again later."
+        );
+    }
+}
+
+//Function to add notes to database
+function addNote($contact_id, $comment, $created_by) {
+    global $connection;
+
+    $query = "INSERT INTO notes (contact_id, comment, created_by) VALUES ('$contact_id', '$comment','$created_by')";
+    $result = mysqli_query($connection, $query);
+    $created_by_user = getUserById($created_by);
+
+    if($result) {
+        return array(
+            'success' => true,
+            'message' => 'Added note to contact: ' . $created_by_user['firstname'] . " " . $created_by_user['lastname'] . '.'
+        );
+    } else {
+        return array(
+            'success' => false,
+            'message' => "Unable to add note. Try again later."
         );
     }
 }
@@ -82,12 +102,26 @@ function login($email, $password)
         return false;
     }
 }
+//removed getcurrentuser function
 
 //get user by email
 function getUserByEmail($email)
 {
     global $connection;
     $query = "SELECT * FROM users WHERE email = '$email'";
+    $result = mysqli_query($connection, $query);
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    } else {
+        return false;
+    }
+}
+
+//get user by id
+function getUserById($id) {
+    global $connection;
+    $query = "SELECT * FROM users WHERE id = '$id'";
     $result = mysqli_query($connection, $query);
     if ($result) {
         $row = mysqli_fetch_assoc($result);
@@ -227,6 +261,36 @@ function generateContactsTable()
 
 }
 
+//get notes
+function getNoteByContact($contact_id) {
+    global $connection;
+    $query = "SELECT * FROM notes WHERE contact_id = '$contact_id'";
+    $result = mysqli_query($connection, $query);
+
+    if ($result) {
+        return $result;
+    } else {
+        return array();
+    }
+}
+
+//generate notes list
+function generateNotesList($contact_id) {
+    $notes = getNoteByContact($contact_id);
+    $note = "";
+
+    while ($row = mysqli_fetch_assoc($notes)) {
+        $created_by = $row['created_by'];
+
+        $created_by_user = getUserById($created_by);
+
+        $note .= "<div class=''>
+                    <h5>" . $created_by_user['firstname'] . " " . $created_by_user['lastname']  . "</h5>
+                        <p>" . $row['comment'] . "</p>
+                </div>";
+    }
+    echo $note;
+}
 
 
 

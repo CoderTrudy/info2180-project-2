@@ -1,4 +1,7 @@
-<?php include_once 'layout.php'; ?>
+<?php
+    session_start();
+    include_once 'layout.php'; 
+?>
 <!DOCTYPE html>
 <html lang="en">
     
@@ -20,7 +23,8 @@
                     $assignedto = $_POST['assignedto'];
                     $telephone = $_POST['telephone'];
                     $type = $_POST['type'];
-                    $result = addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type);
+                    $current_user = $_SESSION['user']['id'];
+                    $result = addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type, $current_user);
                     if ($result['success']) {
                         echo "<div class='alert alert-success'>$result[message]</div>";
                     } else {
@@ -96,7 +100,7 @@
                         <div class="form-field">
                             <label class="form-label" for="type">Type</label>
                             <select class="form-select" id="type" name="type">
-                                <option value="Sales_Lead">Sales Lead</option>
+                                <option value="Sales Lead">Sales Lead</option>
                                 <option value="Support">Support</option>
                             </select>
                         </div>
