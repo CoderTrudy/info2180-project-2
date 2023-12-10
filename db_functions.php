@@ -42,10 +42,10 @@ function addUser($email, $password, $firstname, $lastname, $role)
 }
 
 //function to add contact to database
-function addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type) {
+function addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type, $created_by) {
     global $connection;
 
-    $query = "INSERT INTO contacts (title, firstname, lastname, email, telephone, company, type, assigned_to) VALUES ('$title', '$firstname', '$lastname', '$email', '$telephone', '$company', '$type', '$assignedto')";
+    $query = "INSERT INTO contacts (title, firstname, lastname, email, telephone, company, type, assigned_to, created_by) VALUES ('$title', '$firstname', '$lastname', '$email', '$telephone', '$company', '$type', '$assignedto', '$created_by')";
     $result =  mysqli_query($connection, $query);
 
     if($result) {
@@ -62,10 +62,10 @@ function addContact($title, $firstname, $lastname, $email, $company, $telephone,
 }
 
 //Function to add notes to database
-function addNote($contact_id, $comment) {
+function addNote($contact_id, $comment, $created_by) {
     global $connection;
 
-    $query = "INSERT INTO notes (contact_id, comment) VALUES ('$contact_id', '$comment')";
+    $query = "INSERT INTO notes (contact_id, comment, created_by) VALUES ('$contact_id', '$comment','$created_by')";
     $result = mysqli_query($connection, $query);
 
     if($result) {
@@ -101,17 +101,7 @@ function login($email, $password)
         return false;
     }
 }
-
-//get current user
-function getCurrentUser() {
-    global $connection;
-    $result = $_SESSION['user']['id'];
-    if ($result)
-        return $result;
-    else
-        return false;
-
-}
+//removed getcurrentuser function
 
 //get user by email
 function getUserByEmail($email)

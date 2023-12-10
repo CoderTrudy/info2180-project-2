@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'layout.php';
 ?>
 <!DOCTYPE html>
@@ -62,13 +63,14 @@ include_once 'layout.php';
             </div>    
         </div>
 
-        <!-- notes -->
+        <!-- PHP goes here -->
         <?php
             if (isset($_POST['add-note'])) {
                 $notes = $_POST['notes'];
                 $contact_id = $contact['id'];
+                $current_user = $_SESSION['user']['id'];
 
-                $result = addNote($contact_id, $notes);
+                $result = addNote($contact_id, $notes, $current_user);
                 
                 if ($result['success']) {
                     echo "<div class='alert alert-success'>$result[message]</div>";
@@ -94,7 +96,7 @@ include_once 'layout.php';
 
             </div>
             <div class="card-footer">
-                <form id="notes-form" action="<?=base_url("details")?> method="post" novalidate>
+                <form id="notes-form" action="<?="http://localhost/info2180-project-2/details.php?contact_id=" . $contact['id']?>" method="post" novalidate>
                     <div class="form-field">
                         <label class="form-label" for="notes"><?php echo "Add a note about " . $contact['firstname']?></label>
                         <textarea class="form-control" id="notes" name="notes" rows="4"></textarea>
@@ -102,8 +104,8 @@ include_once 'layout.php';
                     <!-- Save Button -->
                     <div class="form-field">
                             <br>
-                            <button class="btn btn-primary float-end" class="save-button" name="add-note">Save</button>
-                        </div>
+                            <button class="btn btn-primary float-end" class="save-button" name="add-note">Add Note</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -111,4 +113,6 @@ include_once 'layout.php';
 </div>
 
 <?=page_footer()?>
+
+
 </html>
