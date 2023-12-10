@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once 'layout.php'; 
 ?>
 <!DOCTYPE html>
@@ -22,8 +23,8 @@
                     $assignedto = $_POST['assignedto'];
                     $telephone = $_POST['telephone'];
                     $type = $_POST['type'];
-                    $createdby = getCurrentUser();
-                    $result = addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type, $createdby);
+                    $current_user = $_SESSION['user']['id'];
+                    $result = addContact($title, $firstname, $lastname, $email, $company, $telephone, $assignedto, $type, $current_user);
                     if ($result['success']) {
                         echo "<div class='alert alert-success'>$result[message]</div>";
                     } else {
