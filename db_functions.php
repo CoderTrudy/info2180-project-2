@@ -67,11 +67,12 @@ function addNote($contact_id, $comment, $created_by) {
 
     $query = "INSERT INTO notes (contact_id, comment, created_by) VALUES ('$contact_id', '$comment','$created_by')";
     $result = mysqli_query($connection, $query);
+    $created_by_user = getUserById($created_by);
 
     if($result) {
         return array(
             'success' => true,
-            'message' => 'Added note to contact: ' . $contact_id . '.'
+            'message' => 'Added note to contact: ' . $created_by_user['firstname'] . " " . $created_by_user['lastname'] . '.'
         );
     } else {
         return array(
@@ -108,6 +109,19 @@ function getUserByEmail($email)
 {
     global $connection;
     $query = "SELECT * FROM users WHERE email = '$email'";
+    $result = mysqli_query($connection, $query);
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    } else {
+        return false;
+    }
+}
+
+//get user by id
+function getUserById($id) {
+    global $connection;
+    $query = "SELECT * FROM users WHERE id = '$id'";
     $result = mysqli_query($connection, $query);
     if ($result) {
         $row = mysqli_fetch_assoc($result);
@@ -263,12 +277,15 @@ function getNoteByContact($contact_id) {
 //generate notes list
 function generateNotesList($contact_id) {
     $notes = getNoteByContact($contact_id);
-
     $note = "";
 
     while ($row = mysqli_fetch_assoc($notes)) {
+        $created_by = $row['created_by'];
+
+        $created_by_user = getUserById($created_by);
+
         $note .= "<div class=''>
-                    <h5>" . $row['created_by'] . "</h5>
+                    <h5>" . $created_by_user['firstname'] . " " . $created_by_user['lastname']  . "</h5>
                         <p>" . $row['comment'] . "</p>
                 </div>";
     }

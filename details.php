@@ -56,7 +56,9 @@ include_once 'layout.php';
                         </p>
                         <h6 class="card-title">Assigned To</h6>
                         <p class="card-text fw-semibold">
-                        <?php echo $contact['assigned_to']?>
+                        <?php
+                            $assigned = getUserById($contact['assigned_to']);
+                            echo $assigned['firstname'] . " " . $assigned['lastname']?>
                         </p>
                     </div>
                 </div>
