@@ -76,6 +76,7 @@ function addNote($contact_id, $comment, $created_by)
             'success' => true,
             'message' => 'Added note from: ' . $created_by_user['firstname'] . " " . $created_by_user['lastname'] . '.'
         );
+        updateTime($contact_id);
     } else {
         return array(
             'success' => false,
@@ -463,7 +464,19 @@ function switchType($contact_id)
     }
 }
 
+function updateTime($contact_id) {
+    global $connection;
+    // 2023-12-08 18:58:13
+    $newdate = date('Y-m-d H:i:s');
 
+    $query = "UPDATE contacts SET updated_at = '$newdate' WHERE id = '$contact_id'";
+    $result = mysqli_query($connection, $query);
+
+    if($result)
+        return true;
+    else
+        return false;
+}
 
 
 

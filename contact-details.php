@@ -100,6 +100,7 @@ include_once 'layout.php';
                 $notes = $_POST['notes'];
                 $contact_id = $contact['id'];
                 $current_user = $_SESSION['user']['id'];
+                $update_date = date_create($contact['updated_at']);
 
                 $result = addNote($contact_id, $notes, $current_user);
                 
