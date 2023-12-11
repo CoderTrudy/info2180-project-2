@@ -74,7 +74,7 @@ function addNote($contact_id, $comment, $created_by)
     if ($result) {
         return array(
             'success' => true,
-            'message' => 'Added note to contact: ' . $created_by_user['firstname'] . " " . $created_by_user['lastname'] . '.'
+            'message' => 'Added note from: ' . $created_by_user['firstname'] . " " . $created_by_user['lastname'] . '.'
         );
     } else {
         return array(
@@ -408,6 +408,8 @@ function generateNotesList($contact_id)
 
         $date = date_create($row['created_at']);
 
+        $date = date_create($row['created_at']);
+
         $note .= "<div class=''>
                     <b><h8>" . $created_by_user['firstname'] . " " . $created_by_user['lastname'] . "</h8></b>
                         <p>
@@ -422,22 +424,23 @@ function generateNotesList($contact_id)
 }
 
 //return the opposite type based on contact's current type
-/*
 function switchTypeTxt($contact_id) {
 
-    global $connection;
+    $contact = getContactById($contact_id);
+    $result = $contact['type'];
 
-    $query = "SELECT type FROM contacts WHERE id = '$contact_id'";
-    $result = mysqli_query($connection, $query);
-    $type = mysqli_fetch_assoc($result);
-
-    if($type == "Sales Lead") 
-        return "Support";
-    else ($type == "Support") 
-            return "Sales Lead";
-    
+    switch ($result) {
+        case "Sales Lead":
+            echo "Support";
+            break;
+        case "Support":
+            echo "Sales Lead";
+            break;
+        default:
+            echo "Something is wrong.";
+    }
 }
-*/
+
 //updates contact's type
 function switchType($contact_id)
 {

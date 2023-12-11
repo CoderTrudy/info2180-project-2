@@ -38,45 +38,8 @@ header {
   color: black
 }
 
-.btn.self-assign {
-  background-color: #4ade80 ;
-    color: black;
-    border-radius: 5px;
-    height: 40px;
-    width: 150px;
-    border: 1px none; 
-    box-shadow: 2px 2px 4px rgba(0, 100, 0, 0.2); /* Green shadow */
-
-}
-
-.btn.switch-type {
-  border-radius: 5px;
-    background-color: #fbbf24;
-    height: 40px;
-    color: black;
-    border: 1px none; /* Orange border color */
-    box-shadow: 2px 2px 4px rgba(255, 165, 0, 0.2); /* Orange shadow */
-}
-
 .card.mb-3 .card-footer {
   background-color:#f3f4f6;
-}
-
-.support-color {
-  padding: 5px;
-  color: white;
-  font-weight:bold;
-  background-color: #6366f1;
-  white-space: nowrap;
-  border-radius:5px;
-}
-
-.sales-color {
-  padding: 5px;
-  color: black;
-  font-weight: bold;
-  background-color: #fcd34d;
-  border-radius: 5px;
 }
 
 .col.py-3.pt-4.page-content {background-color:#f3f4f6;}

@@ -49,8 +49,13 @@ include_once 'layout.php';
                 ?>
                 
                     <button type="button" class="btn self-assign" name="self-assign"><i class="fa-solid fa-hand"></i> Assign to me</button>
-                    <button type="button" class="btn switch-type" name="switch-type"><i class='fas fa-exchange-alt fa-lg'> </i>Switch to <?=switchTypeTxt($contact['id'])?></button>
-
+                    <button type="button" class="btn switch-type" name="switch-type">
+                        <i class='fas fa-exchange-alt fa-lg'> </i>
+                        <?php
+                            echo "Switch to ";
+                            switchTypeTxt($contact['id']);
+                        ?>
+                    </button>
 
             </div>
         </div>
@@ -61,10 +66,7 @@ include_once 'layout.php';
                 <div class="row">
                     <div class="col-md">
                         <h6 class="card-title text-secondary fw-semibold">Email</h6>
-
-                        <p class="card-text fw-normal">
                         <p class="card-text">
-
                             <?php echo $contact['email']?>
                         </p>
                         <h6 class="card-title text-secondary fw-semibold">Company</h6>
@@ -123,11 +125,8 @@ include_once 'layout.php';
             <div class="card-footer border-top-0">
                 <form id="notes-form" action="<?="http://localhost/info2180-project-2/contact-details.php?contact_id=" . $contact['id']?>" method="post" novalidate>
                     <div class="form-field">
-                        <div class = "write-note" >
-
                         <label class="form-label fw-semibold" for="notes"><?php echo "Add a note about " . $contact['firstname']?></label>
                         <textarea class="form-control" id="notes" name="notes" rows="4"></textarea>
-                    </div>
                     </div>
                     <!-- Save Button -->
                     <div class="form-field">
