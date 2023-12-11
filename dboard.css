@@ -8,14 +8,18 @@
     text-decoration: underline;
 }
 
+/*
 button{
-color: white;
-background-color: rgb(34, 71, 194) !important;
-border-radius: 5px;
-border: none;
-width: 140px;
-height: 40px;
+    color: white;
+    background-color: #4f46e5 !important;
+    border-radius: 5px;
+    border: none;
+    width: 140px;
+    height: 40px;
 }
+*/
+
+
 .caption ul{
     padding: 0;
     list-style: none;
@@ -54,23 +58,25 @@ height: 40px;
 }
 
 
-
-.btn.self-assign {
-    background-color: rgb(21, 207, 21) ;
-      color: black;
-      border-radius: 5px;
-      height: 40px;
-      width: 150px;
-      border: 1px none; 
-      box-shadow: 2px 2px 4px rgba(0, 100, 0, 0.2); /* Green shadow */
-  
-  }
-  
-  .btn.switch-type {
+  button.btn.self-assign {
+    background-color: #4ade80 ;
+    color: black;
     border-radius: 5px;
-      background-color: orange;
-      height: 40px;
-      color: black;
-      border: 1px none; /* Orange border color */
-      box-shadow: 2px 2px 4px rgba(255, 165, 0, 0.2); /* Orange shadow */
-  }
+    height: 40px;
+    width: 150px;
+    border: 1px none; 
+    box-shadow: 2px 2px 4px rgba(0, 100, 0, 0.2); /* Green shadow */
+
+}
+
+button.btn.switch-type {
+  border-radius: 5px;
+    background-color: #fbbf24;
+    height: 40px;
+    color: black;
+    border: 1px none; /* Orange border color */
+    box-shadow: 2px 2px 4px rgba(255, 165, 0, 0.2); /* Orange shadow */
+}
+
+p.note-date{ color:#64748b; font-weight:600;}
+
