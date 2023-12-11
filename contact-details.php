@@ -28,10 +28,14 @@ include_once 'layout.php';
                 </h2>
                 <p class="text-start text-body-secondary lh-sm">
 
-                    <?php echo "Created on " . $contact['created_at'] . " by " . $created_by['firstname'] . " " . $created_by['lastname']?>
+                    <?php
+                        $creation_date = date_create($contact['created_at']);
+                        $update_date = date_create($contact['updated_at']);
+                        echo "Created on " . date_format($creation_date,'F d, Y') . " by " . $created_by['firstname'] . " " . $created_by['lastname']
+                    ?>
 
                     <br>
-                    <?php echo "Updated on " . $contact['updated_at']?>
+                    <?php echo "Updated on " . date_format($update_date, 'F d, Y')?>
                 </p>
             </div>
             <div>
