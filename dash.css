@@ -58,7 +58,7 @@ header {
     box-shadow: 2px 2px 4px rgba(255, 165, 0, 0.2); /* Orange shadow */
 }
 
-#notes-form .form-field {
+.card.mb-3 .card-footer {
   background-color:#f3f4f6;
 }
 

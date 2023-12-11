@@ -288,7 +288,7 @@ function generateContactsTable()
 
     switch ($filterKey) {
        
-        case 'Sale':
+        case 'Sales':
             //filter the contacts array by sales lead type
             $contacts = getContactsTypeSalesLead();
             break;
@@ -308,6 +308,9 @@ function generateContactsTable()
     }
 
 
+
+    
+
     $table = "<table class='table table-striped table-hover'>
     <thead>
         <tr>
@@ -315,7 +318,7 @@ function generateContactsTable()
             <th scope='col'>Email</th>
             <th scope='col'>Company</th>
             <th scope='col'>Type</th>
-            <th scope ='col'>   </th>
+            <th scope ='col'>    </th>
 
         </tr>
     </thead>
@@ -328,11 +331,16 @@ function generateContactsTable()
         
         $fullName = $row['title'] . ". " . $row['firstname'] . " " . $row['lastname'];
 
+        if ($row['type'] == "Sales Lead" )
+            $style = "'padding:5px; color:black; text-transform:uppercase; font-weight:600; background-color:#fcd34d; border-radius:5px; white-space:nowrap;'";
+        else
+            $style = "'padding:5px; color:white; text-transform:uppercase; font-weight:600; background-color: #6366f1; border-radius: 5px'";
+
         $table .= "<tr>
         <td><b>$fullName</b></td>
         <td>" . $row['email'] . "</td>
         <td>" . $row['company'] . "</td>
-        <td>" . $row['type'] . "</td>
+        <td><span style= ". $style .">" . $row['type'] . "</span></td>
         <td> <a href= contact-details.php?contact_id=" . $row['id'] . ">View</a></td>
         </tr>";
 
@@ -432,68 +440,10 @@ function switchType($contact_id)
 }
 
 
-/* function filter(){
-    $filterAll = isset($_GET['filterSL']) ? $_GET['filterSL'] : "All"
-    $filterSaLe =
-    $filter Sup =
-    $filter Asgn =
 
 
 
-   if (($filter == "All" || $row['type'] == $filter) && ($filter != "Sales_Lead" || $row['type'] == "Sales Lead")) {
-            $table .= "<tr>
-                <td>$fullName</td>
-                <td>" . $row['email'] . "</td>
-                <td>" . $row['company'] . "</td>
-                <td>" . $row['type'] . "</td>
-                <td><a href='view-contact/" . $row['id'] . "'>View</a></td>
-            </tr>";
-            $count++;
-        }
-    }
 
-    //if no contacts
-    if ($count == 1) {
-        $table .= "<tr>
-        <td colspan='5' class='text-center'>No contacts found.</td>
-        </tr>";
-    }
-}
-
-*/
-
-
-/*
-function filterTable(filterValue) {
-    var table, tr, td, i, txtValue;
-    table = document.getElementById("generateContactsTable()"); // <--- table ID generateContactsTable()
-    tr = table.getElementsByTagName("tr");
-  
-    // Loop through all table rows, and hide those that don't match the filter value
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[3]; // Change index based on the column you want to filter
-      if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue === filterValue) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
-        }
-      }
-    }
-  }
-  
-  function resetFilter() {
-    var table, tr, i;
-    table = document.getElementById(""); // <--- table ID
-    tr = table.getElementsByTagName("tr");
-  
-    // Reset display for all table rows
-    for (i = 0; i < tr.length; i++) {
-      tr[i].style.display = "";
-    }
-  }
-*/
 
 
 //close db

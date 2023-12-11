@@ -53,16 +53,24 @@ height: 40px;
     border-top-color: rgb(255, 250, 250);
 }
 
-.write-note {
-    background-color: #f0f0f0 !important; /* Use your desired shade of gray */
-    padding: 10px;
+
+
+.btn.self-assign {
+    background-color: rgb(21, 207, 21) ;
+      color: black;
+      border-radius: 5px;
+      height: 40px;
+      width: 150px;
+      border: 1px none; 
+      box-shadow: 2px 2px 4px rgba(0, 100, 0, 0.2); /* Green shadow */
+  
+  }
+  
+  .btn.switch-type {
     border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.write-note textarea {
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: 5px;
-}
-
+      background-color: orange;
+      height: 40px;
+      color: black;
+      border: 1px none; /* Orange border color */
+      box-shadow: 2px 2px 4px rgba(255, 165, 0, 0.2); /* Orange shadow */
+  }

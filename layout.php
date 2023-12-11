@@ -65,7 +65,6 @@ function page_header($title = "INFO2180 PROJECT 2")
                         </a>
 
                     </li>
-                    <hr>
                     <li>
                         <a href="{$logout}" class="nav-link px-0 align-middle">
                             <i class="fas fa-sign-out fa-rotate-180"></i> <span class="ms-1 d-none d-sm-inline">Logout</span></a>
