@@ -27,7 +27,11 @@ include_once 'layout.php';
                     <?php echo "" . $contact['title'] . ". " . $contact['firstname'] . " " . $contact['lastname']?>
                 </h2>
                 <p class="text-start text-body-secondary lh-sm">
+<<<<<<< HEAD
                     <?php echo "Created on " . $contact['created_at'] . " by " . $created_by['firstname'] . " " . $created_by['lastname']?>
+=======
+                    <?php echo "Created on " . $contact['created_at'] . " by " . $contact['created_by']?>
+>>>>>>> ba4624b3858d3ce722987a8c838dbce03a79f57b
                     <br>
                     <?php echo "Updated on " . $contact['updated_at']?>
                 </p>
@@ -60,7 +64,11 @@ include_once 'layout.php';
                 <div class="row">
                     <div class="col-md">
                         <h6 class="card-title text-secondary fw-semibold">Email</h6>
+<<<<<<< HEAD
                         <p class="card-text fw-normal">
+=======
+                        <p class="card-text">
+>>>>>>> ba4624b3858d3ce722987a8c838dbce03a79f57b
                             <?php echo $contact['email']?>
                         </p>
                         <h6 class="card-title text-secondary fw-semibold">Company</h6>
@@ -119,7 +127,10 @@ include_once 'layout.php';
             <div class="card-footer border-top-0">
                 <form id="notes-form" action="<?="http://localhost/info2180-project-2/contact-details.php?contact_id=" . $contact['id']?>" method="post" novalidate>
                     <div class="form-field">
+<<<<<<< HEAD
                         <div class = "write-note" >
+=======
+>>>>>>> ba4624b3858d3ce722987a8c838dbce03a79f57b
                         <label class="form-label fw-semibold" for="notes"><?php echo "Add a note about " . $contact['firstname']?></label>
                         <textarea class="form-control" id="notes" name="notes" rows="4"></textarea>
                     </div>
