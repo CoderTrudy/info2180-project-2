@@ -393,48 +393,69 @@ function getNoteByContact($contact_id)
     }
 }
 
+
 //generate notes list
 function generateNotesList($contact_id)
 {
     $notes = getNoteByContact($contact_id);
     $note = "";
+    
 
     while ($row = mysqli_fetch_assoc($notes)) {
         $created_by = $row['created_by'];
 
         $created_by_user = getUserById($created_by);
 
+        $date = date_create($row['created_at']);
+
         $note .= "<div class=''>
-                    <h5>" . $created_by_user['firstname'] . " " . $created_by_user['lastname'] . "</h5>
-                        <p>" . $row['comment'] . "</p>
+                    <b><h8>" . $created_by_user['firstname'] . " " . $created_by_user['lastname'] . "</h8></b>
+                        <p>
+                            " . $row['comment'] . "
+                            <br>
+                            " . date_format($date,'F d, Y') . " at " . date_format($date,'ga') . "
+                        </p>
+                
                 </div>";
     }
     echo $note;
 }
 
+//return the opposite type based on contact's current type
+/*
+function switchTypeTxt($contact_id) {
 
-function switchType($contact_id)
-{
     global $connection;
 
     $query = "SELECT type FROM contacts WHERE id = '$contact_id'";
     $result = mysqli_query($connection, $query);
+    $type = mysqli_fetch_assoc($result);
 
-    if (mysqli_fetch_assoc($result) == "Sales Lead")
-        $query = "UPDATE contacts SET type = 'Support' WHERE id = '$contact_id'";
-    else
-        $query = "UPDATE contacts SET type = 'Sales Lead' WHERE id = '$contact_id'";
-    $result = mysqli_query($connection, $query);
+    if($type == "Sales Lead") 
+        return "Support";
+    else ($type == "Support") 
+            return "Sales Lead";
+    
+}
+*/
+//updates contact's type
+function switchType($contact_id)
+{
+    global $connection;
+
+        $type = switchTypeTxt($contact_id);
+        $query = "UPDATE contacts SET type = '$type' WHERE id = '$contact_id'";
+        $result = mysqli_query($connection, $query);
 
     if ($result) {
         return array(
             'success' => true,
-            'message' => 'Added note to contact.'
+            'message' => 'Switched to ' . $type . "."
         );
     } else {
         return array(
             'success' => false,
-            'message' => "Unable to add note. Try again later."
+            'message' => 'Failed to switch to' . $type . '.'
         );
     }
 }

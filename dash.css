@@ -39,7 +39,7 @@ header {
 }
 
 .btn.self-assign {
-  background-color: rgb(21, 207, 21) ;
+  background-color: #4ade80 ;
     color: black;
     border-radius: 5px;
     height: 40px;
@@ -51,7 +51,7 @@ header {
 
 .btn.switch-type {
   border-radius: 5px;
-    background-color: orange;
+    background-color: #fbbf24;
     height: 40px;
     color: black;
     border: 1px none; /* Orange border color */
@@ -62,3 +62,21 @@ header {
   background-color:#f3f4f6;
 }
 
+.support-color {
+  padding: 5px;
+  color: white;
+  font-weight:bold;
+  background-color: #6366f1;
+  white-space: nowrap;
+  border-radius:5px;
+}
+
+.sales-color {
+  padding: 5px;
+  color: black;
+  font-weight: bold;
+  background-color: #fcd34d;
+  border-radius: 5px;
+}
+
+.col.py-3.pt-4.page-content {background-color:#f3f4f6;}

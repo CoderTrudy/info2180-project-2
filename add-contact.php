@@ -6,11 +6,12 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<?= page_header("Add Contact") ?>
+<?= page_header("New Contact") ?>
 
 <!-- Content for Page Here -->
 <div class="col py-3 pt-4 page-content">
     <!-- insert here -->
+    <h2 class="text-start fw-bold mb-4">New Contact</h2>
     <div class="card">
         <div class="card-body">
             <!-- PHP goes here -->
@@ -38,7 +39,6 @@
                 }
             ?>
 
-            <h2 class="text-start fw-bold mb-4">Add Contact</h2>
             <form id="contact-form" action="<?=base_url("add-contact")?>" method="post">
                 <div class="row">
                     <!-- Title -->

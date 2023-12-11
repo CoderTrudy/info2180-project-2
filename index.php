@@ -93,7 +93,7 @@ if (isset($_SESSION['user'])) {
 
   <div class="footer">
     <div class="footer-content">
-      <p>Copyright &copy; 2022 Dolphin CRM</p>
+      <p>Copyright &copy; 2023 Dolphin CRM</p>
     </div>
   </div>
 

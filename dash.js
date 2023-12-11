@@ -111,3 +111,47 @@ function isValidEmail(emailAddress) {
 function isValidUrl(websiteAddress) {
   return /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i.test(websiteAddress);
 }
+
+
+
+$(document).ready(function() {
+
+  // if the hash changes, run this code
+  $(window).on('hashchange', function() {
+    // Get the hash but remove the #
+    var pageHash = window.location.hash.substring(1);
+    //console.log(pageHash);
+
+    // if no hash is present in the URL then default to home.
+    if (pageHash.length == 0) {
+      pageHash = 'dashboard';
+    }
+
+    // load the page and put it's contents in the main element.
+    $('div').load(pageHash + '.php');
+  });
+
+  // if a navigation link is clicked load the page
+  $("a").on('click', function(event) {
+    event.preventDefault();
+    var page = $(this).attr("href");
+    window.location.hash = formatForHash(page);
+
+    // load the page and put it's contents in the main element.
+    $('div').load(page);
+  });
+
+  $(window).trigger('hashchange');
+});
+
+/**
+ * Format page filename for hash
+ *
+ * @param page string the path to the page.
+ * @return string
+ */
+function formatForHash(page) {
+  var hash = page.split('.');
+  return hash[0];
+}
+

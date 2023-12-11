@@ -8,6 +8,7 @@ include_once 'layout.php';
 <!-- Content for Page Here -->
 <div class="col py-3 pt-4 page-content">
     <!-- insert here -->
+    <h2 class="text-start fw-bold mb-4">New User</h2>
     <div class="card">
         <div class="card-body">
             <!-- information -->

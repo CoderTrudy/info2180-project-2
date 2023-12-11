@@ -14,7 +14,7 @@ include_once 'layout.php';
             <h2 class="text-start fw-bold mb-4">Dashboard</h2>
         </div>
         <div class="col text-end">
-            <a href="add-contact.php"class="btn btn-primary"><i class ="fa-solid fa-plus"></i> Add Contact</a>
+            <a href="add-contact.php"class="btn btn-primary"><i class ="fa-solid fa-plus"></i> New Contact</a>
         </div>
     <hr />
             <!-- filter -->
@@ -26,9 +26,9 @@ include_once 'layout.php';
 
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="dboard.js"></script>
 <?= page_footer() ?>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     function handleAdd() {
         // Get form data
