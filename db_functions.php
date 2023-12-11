@@ -74,7 +74,7 @@ function addNote($contact_id, $comment, $created_by)
     if ($result) {
         return array(
             'success' => true,
-            'message' => 'Added note to contact: ' . $created_by_user['firstname'] . " " . $created_by_user['lastname'] . '.'
+            'message' => 'Added note from: ' . $created_by_user['firstname'] . " " . $created_by_user['lastname'] . '.'
         );
     } else {
         return array(
@@ -404,37 +404,56 @@ function generateNotesList($contact_id)
 
         $created_by_user = getUserById($created_by);
 
+        $date = date_create($row['created_at']);
+
         $note .= "<div class=''>
                     <h5>" . $created_by_user['firstname'] . " " . $created_by_user['lastname'] . "</h5>
-                        <p>" . $row['comment'] . "</p>
+                    <p>
+                        " . $row['comment'] . "
+                    </p><p class='note-date'>
+                        " . date_format($date,'F d, Y') . " at " . date_format($date,'ga') . "
+                    </p>
                 </div>";
     }
     echo $note;
 }
 
+//return the opposite type based on contact's current type
+function switchTypeTxt($contact_id) {
 
+    $contact = getContactById($contact_id);
+    $result = $contact['type'];
+
+    switch ($result) {
+        case "Sales Lead":
+            echo "Support";
+            break;
+        case "Support":
+            echo "Sales Lead";
+            break;
+        default:
+            echo "Something is wrong.";
+    }
+}
+
+//updates contact's type
 function switchType($contact_id)
 {
     global $connection;
 
-    $query = "SELECT type FROM contacts WHERE id = '$contact_id'";
-    $result = mysqli_query($connection, $query);
-
-    if (mysqli_fetch_assoc($result) == "Sales Lead")
-        $query = "UPDATE contacts SET type = 'Support' WHERE id = '$contact_id'";
-    else
-        $query = "UPDATE contacts SET type = 'Sales Lead' WHERE id = '$contact_id'";
-    $result = mysqli_query($connection, $query);
+        $type = switchTypeTxt($contact_id);
+        $query = "UPDATE contacts SET type = '$type' WHERE id = '$contact_id'";
+        $result = mysqli_query($connection, $query);
 
     if ($result) {
         return array(
             'success' => true,
-            'message' => 'Added note to contact.'
+            'message' => 'Switched to ' . $type . "."
         );
     } else {
         return array(
             'success' => false,
-            'message' => "Unable to add note. Try again later."
+            'message' => 'Failed to switch to' . $type . '.'
         );
     }
 }
